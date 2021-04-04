@@ -1,7 +1,7 @@
-#define SA3 "[SA3]"
-#define PLUGIN_NAME "ServerAdvertisements3"
-#define PLUGIN_AUTHOR "ESK0"
-#define PLUGIN_VERSION "3.1.4"
+#define SA3 "[THS_Advert!]"
+#define PLUGIN_NAME "[THS] Advert!"
+#define PLUGIN_AUTHOR "THS based on ESK0 plugin"
+#define PLUGIN_VERSION "1.0"
 #define PLUGIN_HASH "$2y$10$MHpA2pP0z8JH5Cfg0rBluuGl0AGJRoY75qvrlTYs2FyyGqljD.kz2"
 #define API_KEY "e1b754d2baccaea944dc62419f67d86d90a657ec"
 

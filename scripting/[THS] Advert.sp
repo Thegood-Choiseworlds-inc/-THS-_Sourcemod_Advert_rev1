@@ -4,8 +4,8 @@
 #include <clientprefs>
 #include <multicolors>
 
-#include "files/globals.sp"
-#include "files/client.sp"
+#include "thsdev_advert_files/globals.sp"
+#include "thsdev_advert_files/client.sp"
 
 #pragma newdecls required
 #pragma semicolon 1
@@ -13,7 +13,7 @@
 #define LoopClients(%1) for(int %1 = 1;%1 <= MaxClients;%1++) if(IsValidClient(%1))
 
 
-#include "files/misc.sp"
+#include "thsdev_advert_files/misc.sp"
 
 
 public Plugin myinfo =
@@ -22,22 +22,22 @@ public Plugin myinfo =
   version = PLUGIN_VERSION,
   author = PLUGIN_AUTHOR,
   description = "Server Advertisement",
-  url = "https://forums.alliedmods.net/showthread.php?t=248314"
+  url = "https://github.com/Thegood-Choiseworlds-inc/-THS-_Sourcemod_Advert_rev1"
 };
 
 public void OnPluginStart()
 {
-  CreateConVar("SA3_version", PLUGIN_VERSION, "ServerAdvertisement3", FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
-  AutoExecConfig(true, "ServerAdvertisements3");
+  CreateConVar("thsdev_advert_version", PLUGIN_VERSION, "ServerAdvertisement3", FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
+  AutoExecConfig(true, "[THS]_Advert");
 
-  RegAdminCmd("sm_sa3debug", Command_sa3, ADMFLAG_ROOT, "Message debug");
-  RegAdminCmd("sm_sa3r", Command_sa3r, ADMFLAG_ROOT, "Message reload");
+  RegAdminCmd("sm_thsdev_advert_debug", Command_sa3, ADMFLAG_ROOT, "[THS] Message debug");
+  RegAdminCmd("sm_thsdev_advert_reload", Command_sa3r, ADMFLAG_ROOT, "[THS] Message reload");
 
-  RegConsoleCmd("sm_sa3lang", Command_ChangeLanguage);
+  RegConsoleCmd("sm_thsdev_advert_lang", Command_ChangeLanguage);
 
-  BuildPath(Path_SM, sConfigPath, sizeof(sConfigPath), "configs/ServerAdvertisements3.cfg");
+  BuildPath(Path_SM, sConfigPath, sizeof(sConfigPath), "configs/[THS]_Advert.cfg");
 
-  g_cV_Enabled = CreateConVar("sm_sa3_enable", "1", "Enable/Disable ServerAdvertisements3");
+  g_cV_Enabled = CreateConVar("sm_thsdev_advert_enable", "1", "Enable/Disable [THS]_Advert");
   g_b_Enabled = g_cV_Enabled.BoolValue;
   g_cV_Enabled.AddChangeHook(OnConVarChanged);
 
@@ -319,16 +319,16 @@ public void LoadConfig()
 {
   aLanguages.Clear();
   aWelcomeMessage.Clear();
-  KeyValues kvConfig = new KeyValues("ServerAdvertisements3");
+  KeyValues kvConfig = new KeyValues("[THS]_Advert");
   if(FileExists(sConfigPath) == false)
   {
-    SetFailState("%s Unable to find ServerAdvertisements3.cfg in %s",SA3, sConfigPath);
+    SetFailState("%s Unable to find [THS]_Advert.cfg in %s",SA3, sConfigPath);
     return;
   }
   kvConfig.ImportFromFile(sConfigPath);
   if(kvConfig.JumpToKey("Settings"))
   {
-    kvConfig.GetString("ServerName", sServerName, sizeof(sServerName), "[ServerAdvertisements3]");
+    kvConfig.GetString("ServerName", sServerName, sizeof(sServerName), "[[THS]_Advert]");
     fTime = kvConfig.GetFloat("Time", 30.0);
     char sLanguages[64];
     char sLanguageList[64][12];
@@ -419,10 +419,10 @@ public void LoadConfig()
 public void LoadMessages()
 {
   aMessagesList.Clear();
-  KeyValues kvMessages = new KeyValues("ServerAdvertisements3");
+  KeyValues kvMessages = new KeyValues("[THS]_Advert");
   if(FileExists(sConfigPath) == false)
   {
-    SetFailState("%s Unable to find ServerAdvertisements3.cfg in %s",SA3, sConfigPath);
+    SetFailState("%s Unable to find [THS]_Advert.cfg in %s",SA3, sConfigPath);
     return;
   }
   kvMessages.ImportFromFile(sConfigPath);
